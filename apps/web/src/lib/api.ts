@@ -1,6 +1,6 @@
 import type { AttackKind } from "./types";
 
-const BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+const BASE = process.env.NEXT_PUBLIC_API_URL ?? "https://cerebrashield-api.onrender.com";
 
 export async function triggerAttack(kind: AttackKind, agent_id?: string) {
   const res = await fetch(`${BASE}/attack`, {
