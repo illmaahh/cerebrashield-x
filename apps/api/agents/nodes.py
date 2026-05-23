@@ -3,11 +3,16 @@ from typing import Dict
 from .llm import chat
 from .prompts import PLANNER_SYS, RESEARCH_SYS, MEMORY_SYS, SECURITY_SYS
 from detectors.heuristics import heuristic_score
-from detectors.semantic import semantic_drift
 from detectors.drift import record, kl_drift
 from memory.store import baseline_for, add_memory
 from memory.snapshots import take_snapshot, latest_clean
 from config import settings
+
+if settings.USE_LLM:
+    from detectors.semantic import semantic_drift
+else:
+    def semantic_drift(text, baseline):
+        return 0.0
 
 
 async def planner_node(state: Dict) -> Dict:
